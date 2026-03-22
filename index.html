@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>short intro</title>
+
+    <style>
+        body {
+            background: paleturquoise;
+            color: black;
+            font-family: monospace;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        p {
+            font-size: 24px;
+            margin: 10px;
+        }
+
+        .name {
+            color: burlywood;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 30px;
+        }
+
+        /* glitch effect */
+        .glitch {
+            position: relative;
+            display: inline-block;
+            animation: glitch 1s infinite;
+        }
+
+    
+
+        /* fade animation */
+        .fade-out {
+            opacity: 0;
+            transition: 0.6s;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transition: 0.6s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro">
+        <p class="name glitch">ZIYAD HASSAN</p>
+        <p>Noctilucent</p>
+        <p>Ambivert</p>
+        <p>PZSian 25</p>
+        <p>NDC 27</p>
+    </div>
+
+    <p id="message"></p>
+<script>
+const message = document.getElementById("message");
+
+// typing effect function
+function typeText(text, speed, callback) {
+    let i = 0;
+    message.textContent = "";
+
+    function typing() {
+        if (i < text.length) {
+            message.textContent += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        } else if (callback) {
+            callback();
+        }
+    }
+
+    typing();
+}
+
+// loading dots animation
+let dots = 0;
+let loading = setInterval(() => {
+    dots = (dots + 1) % 4;
+    message.textContent = "Please wait" + ".".repeat(dots);
+}, 500);
+
+// after 3 sec → stop loading + transition
+setTimeout(() => {
+    clearInterval(loading);
+
+    message.classList.add("fade-out");
+
+    setTimeout(() => {
+        message.classList.remove("fade-out");
+
+        typeText("If you wanna have long intro, please DM :)", 50);
+
+    }, 600);
+
+}, 3000);
+</script>
+
+</body>
+</html>
